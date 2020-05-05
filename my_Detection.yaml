@@ -1,0 +1,22 @@
+_BASE_: "./faster_rcnn_R_50_FPN_1x.yaml"
+OUTPUT_DIR: "./out/cats_breeds"
+MODEL:
+  RPN:
+    HEAD_NAME: "StandardRPNHead"
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 256
+    NUM_CLASSES: 67
+DATALOADER:
+  NUM_WORKERS: 1
+  FILTER_EMPTY_ANNOTATIONS: False
+DATASETS:
+  TRAIN: ("cats_train_breeds",)
+  TEST: ("cats_train_breeds",)
+SOLVER:
+  STEPS: (180000, 240000)
+  MAX_ITER: 10000000
+  WARMUP_ITERS: 100
+  IMS_PER_BATCH: 2
+  BASE_LR: 0.0025
+VIS_PERIOD: 3000
+
